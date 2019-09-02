@@ -23,8 +23,9 @@ Route::get('/', function () {
     PATCH (singular) -> update
     DELETE (singular) -> destroy
 */
-//Route::resource('projects', 'ProjectsController'); this is same below
+Route::resource('projects', 'ProjectsController');  //this is same as below
 
+/*
 Route::get('/projects', 'ProjectsController@index'); //get
 Route::get('/projects/{project}', 'ProjectsController@show'); //dynamic
 
@@ -35,4 +36,4 @@ Route::get('/projects/{project}/edit', 'ProjectsController@edit'); //update form
 Route::patch('/projects/{project}', 'ProjectsController@update'); //update, update into DB
 
 Route::delete('/projects/{project}', 'ProjectsController@destroy'); //delete
-
+*/

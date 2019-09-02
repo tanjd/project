@@ -16,18 +16,20 @@
 
 <body>
     <h1>Create a new Project</h1>
-    <form method= "POST" action ="/projects">
-        {{csrf_field()}} <!--V important, need it-->
+    <form method="POST" action="/projects">
+        <!--V important, need it-->
+        {{csrf_field()}}
+
         <div>
-            <input type="text" name="title" placeholder ="Project title">
+            <input type="text" name="title" placeholder="Project title">
         </div>
         <div>
-            <textarea name="description" placeholder ="Project description"></textarea>
+            <textarea name="description" placeholder="Project description"></textarea>
         </div>
         <div>
-            <button type ="submit">Create Project</button>
+            <button type="submit">Create Project</button>
         </div>
-        
+
     </form>
 </body>
 
