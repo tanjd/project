@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class AddLevelToProjects extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. updating projects
      *
      * @return void
      */
