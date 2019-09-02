@@ -41,7 +41,7 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         //
         $project = new Project();
@@ -50,6 +50,16 @@ class ProjectsController extends Controller
         $project->title = request('title');
         $project->description = request('description');
         $project->save();
+
+        return redirect('/projects');
+    }*/
+
+    public function store(Request $request)
+    {
+        Project::create(request(['title', 'description']));
+
+        //use fillable 
+        /*Project::create(request()->all()); */
 
         return redirect('/projects');
     }
@@ -62,7 +72,9 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -79,6 +91,13 @@ class ProjectsController extends Controller
         return view('projects.edit', compact('project'));
     }
 
+    /* alternative way 'CLEANER'
+    public function edit(Project $project)
+    {
+        return view('projects.edit', compact('project'));
+    }
+    /*
+
     /**
      * Update the specified resource in storage.
      *
@@ -89,6 +108,7 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
         //dd(request()->all());
+
         $project = Project::findOrFail($id);
         $project->title = request('title');
         $project->description = request('description');
@@ -96,6 +116,12 @@ class ProjectsController extends Controller
         $project->save();
         return redirect('/projects');
     }
+    /*public function update(Project $project)
+    {
+        $project->update(request(['title', 'desciption']));
+        
+        return redirect('/projects');
+    }*/
 
     /**
      * Remove the specified resource from storage.

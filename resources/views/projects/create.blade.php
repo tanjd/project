@@ -1,36 +1,22 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layout')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('content')
+<h1 class="title">Create a new Project</h1>
+<form method="POST" action="/projects">
+    <!--V important, need it-->
+    @csrf
 
-    <title>Create a new Project</title>
-
-    <!-- Fonts -->
-
-    <!-- Styles -->
-    <style>
-    </style>
-</head>
-
-<body>
-    <h1>Create a new Project</h1>
-    <form method="POST" action="/projects">
-        <!--V important, need it-->
-        {{csrf_field()}}
-
-        <div>
-            <input type="text" name="title" placeholder="Project title">
+    <div class="control">
+        <input type="text" class="input" name="title" placeholder="Title"">
         </div>
-        <div>
-            <textarea name="description" placeholder="Project description"></textarea>
+        <div class=" control">
+        <textarea name="description" class="textarea"></textarea>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button type="submit" class="button is-link">Update Project</button>
         </div>
-        <div>
-            <button type="submit">Create Project</button>
-        </div>
+    </div>
 
-    </form>
-</body>
-
-</html>
+</form>
+@endsection
