@@ -14,9 +14,25 @@
 Route::get('/', function () {
     return view('welcome');
 });
+/*
+    GET -> index
+    GET (form) -> create
+    GET (singular) -> show
+    POST -> store
+    GET (form) -> edit
+    PATCH (singular) -> update
+    DELETE (singular) -> destroy
+*/
+//Route::resource('projects', 'ProjectsController'); this is same below
 
 Route::get('/projects', 'ProjectsController@index'); //get
-Route::post('/projects', 'ProjectsController@store'); //store
-Route::get('/projects/create', 'ProjectsController@create'); //create
+Route::get('/projects/{project}', 'ProjectsController@show'); //dynamic
 
+Route::get('/projects/create', 'ProjectsController@create'); //create form
+Route::post('/projects', 'ProjectsController@store'); //store, insert into DB
+
+Route::get('/projects/{project}/edit', 'ProjectsController@edit'); //update form
+Route::patch('/projects/{project}', 'ProjectsController@update'); //update, update into DB
+
+Route::delete('/projects/{project}', 'ProjectsController@destroy'); //delete
 
