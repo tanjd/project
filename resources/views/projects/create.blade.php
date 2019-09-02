@@ -14,7 +14,7 @@
     </div>
     <div class="field">
         <div class="control">
-            <button type="submit" class="button is-link">Update Project</button>
+            <button type="submit" class="button is-link">Create Project</button>
         </div>
     </div>
 
