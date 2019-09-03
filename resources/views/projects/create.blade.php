@@ -7,10 +7,10 @@
     @csrf
 
     <div class="control">
-        <input type="text" class="input" name="title" placeholder="Title"">
-        </div>
-        <div class=" control">
-        <textarea name="description" class="textarea"></textarea>
+        <input type="text" class="input {{ $errors->has('title') ? 'is-danger' : ''}}" name="title" placeholder="Title" value="{{ old('title') }}" required>
+    </div>
+    <div class=" control">
+        <textarea name="description" class="textarea {{ $errors->has('description') ? 'is-danger' : ''}}" value="{{ old('description') }}"></textarea>
     </div>
     <div class="field">
         <div class="control">
@@ -18,5 +18,14 @@
         </div>
     </div>
 
+    @if ($errors->any())
+    <div class="notification is-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 </form>
 @endsection

@@ -56,7 +56,23 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        Project::create(request(['title', 'description']));
+        //validation: Search validation laravel for more
+        $attributes = request()->validate([
+            'title' => ['required', 'min:3'],
+            'description' => 'required'
+        ]);
+
+        //Create :use guarded in modal
+        Project::create($attributes);
+
+        /*Even shorter than above: Combine validation and create
+        Project::create(
+            request()->validate([
+                'title' => ['required', 'min:3'],
+                'description' => 'required'
+            ])
+        );
+        */
 
         //use fillable 
         /*Project::create(request()->all()); */
