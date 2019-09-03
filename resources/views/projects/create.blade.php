@@ -10,7 +10,7 @@
         <input type="text" class="input {{ $errors->has('title') ? 'is-danger' : ''}}" name="title" placeholder="Title" value="{{ old('title') }}" required>
     </div>
     <div class=" control">
-        <textarea name="description" class="textarea {{ $errors->has('description') ? 'is-danger' : ''}}" value="{{ old('description') }}"></textarea>
+        <textarea name="description" class="textarea {{ $errors->has('description') ? 'is-danger' : ''}}">{{ old('description') }}</textarea>
     </div>
     <div class="field">
         <div class="control">
