@@ -18,6 +18,7 @@
         </div>
     </div>
 
+    <!--error notification-->
     @if ($errors->any())
     <div class="notification is-danger">
         <ul>
