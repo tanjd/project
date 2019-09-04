@@ -37,3 +37,5 @@ Route::patch('/projects/{project}', 'ProjectsController@update'); //update, upda
 
 Route::delete('/projects/{project}', 'ProjectsController@destroy'); //delete
 */
+
+Route::patch('/tasks/{task}', 'ProjectTasksController@update');

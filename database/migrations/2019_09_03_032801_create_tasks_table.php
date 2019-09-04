@@ -15,7 +15,7 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //need a positive number here
+            //unsignedinteger positive number here
             $table->unsignedinteger('project_id');
             $table->string('description');
             $table->boolean('completed')->default(false);
