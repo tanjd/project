@@ -14,11 +14,9 @@ class ProjectTasksController extends Controller
 
     {
         $attributes = request()->validate(['description' => 'required']);
-
         //calling a method from project.php
-        $project->addTask(request($attributes));
+        $project->addTask($attributes);
         return back();
-        
 
         /*Task::create([
             'project_id' => $project->id,
@@ -26,8 +24,6 @@ class ProjectTasksController extends Controller
         ]);
 
         return back();*/
-        
-
     }
     // public function update(Task $task)
     public function update(Request $request, $id)
