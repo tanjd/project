@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Project;
+use PHPUnit\Framework\IncompleteTest;
 
 class ProjectTasksController extends Controller
 {
@@ -25,9 +26,21 @@ class ProjectTasksController extends Controller
 
         return back();*/
     }
-    // public function update(Task $task)
-    public function update(Request $request, $id)
 
+    /*public function update(Request $request, $id)
+
+    { 
+
+        $task = Task::findOrFail($id);
+        $task->completed = $request->has('completed');
+
+        $task->save();
+        return back();
+
+        
+    }*/
+
+    public function update(Task $task)
     {
         //Need to relearn this
         // dd($task);
@@ -38,12 +51,11 @@ class ProjectTasksController extends Controller
         ]));
         return back();*/
 
-        $task = Task::findOrFail($id);
-        $task->completed = $request->has('completed');
+        //$task->complete(request()->has('completed'));
 
-        $task->save();
+        $method = request()->has('completed') ? 'complete' : 'incomplete';
+        $task->$method();
+
         return back();
-
-        //$page->update($input);
     }
 }
