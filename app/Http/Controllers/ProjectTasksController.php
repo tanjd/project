@@ -12,6 +12,7 @@ class ProjectTasksController extends Controller
     public function update(Request $request, $id)
 
     {
+        //Need to relearn this
         // dd($task);
         //dd(request()->all());
         /*
