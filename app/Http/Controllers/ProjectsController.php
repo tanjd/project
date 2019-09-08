@@ -17,6 +17,13 @@ class ProjectsController extends Controller
 
         //$projects = \app\Project::all(); 
         $projects = Project::all();
+        $projects = Project::where('owner_id',auth()->id())->get(); //select * from where projects where owner_id - x
+        
+        /*auth()->id()// 4  
+        auth()->user() //user
+        auth()->check()// boolean
+        //if (auth()->guest())*/
+
 
         //$projects = auth()=>useR()->projects; future
 
