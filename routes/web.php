@@ -39,3 +39,7 @@ Route::delete('/projects/{project}', 'ProjectsController@destroy'); //delete
 */
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
 Route::patch('/tasks/{task}', 'ProjectTasksController@update');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

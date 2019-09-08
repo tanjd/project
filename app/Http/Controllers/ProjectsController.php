@@ -12,13 +12,23 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        //to everything
+        $this->middleware('auth');
+        //only
+        //$this->middleware('auth')->only(['']);
+        //Except
+        //$this->middleware('auth')->except(['']);
+    }
     public function index()
     {
 
         //$projects = \app\Project::all(); 
         $projects = Project::all();
-        $projects = Project::where('owner_id',auth()->id())->get(); //select * from where projects where owner_id - x
-        
+        $projects = Project::where('owner_id', auth()->id())->get(); //select * from where projects where owner_id - x
+
         /*auth()->id()// 4  
         auth()->user() //user
         auth()->check()// boolean
@@ -63,11 +73,14 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
+
         //validation: Search validation laravel for more
         $attributes = request()->validate([
             'title' => ['required', 'min:3'],
             'description' => 'required'
         ]);
+
+        $attributes['owner_id'] = auth()->id();
 
         //Create :use guarded in modal
         Project::create($attributes);
@@ -97,6 +110,18 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($id);
 
+        $this->authorize('update', $project);
+        /* 
+        same as above
+
+        abort_if($project->owner_id !== auth()->id(), 403);
+
+        same as above
+
+        if ($project->owner_id !== auth()->id()) {
+            abort(403);
+        }*/
+
         return view('projects.show', compact('project'));
     }
 
@@ -106,20 +131,21 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    /*public function edit($id)
     {
         //
         $project = Project::findOrFail($id);
 
         return view('projects.edit', compact('project'));
-    }
+    }*/
 
-    /* alternative way 'CLEANER'
+    //alternative way 'CLEANER'
     public function edit(Project $project)
     {
+        $this->authorize('update', $project);
+
         return view('projects.edit', compact('project'));
     }
-    /*
 
     /**
      * Update the specified resource in storage.
@@ -131,11 +157,17 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
         //dd(request()->all());
-
+        //find id of the project
         $project = Project::findOrFail($id);
+
+        //check if user have authorization to update
+        $this->authorize('update', $project);
+
+        //get title and description from the form and store into $project
         $project->title = request('title');
         $project->description = request('description');
 
+        //update project
         $project->save();
         return redirect('/projects');
     }
@@ -152,10 +184,11 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
         //dd('hello');
-        Project::findOrFail($id)->delete();
+        $this->authorize('update', $project);
+        Project::delete();
 
         return redirect('/projects');
     }
